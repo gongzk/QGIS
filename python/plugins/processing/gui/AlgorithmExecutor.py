@@ -35,6 +35,7 @@ from processing.gui.Postprocessing import handleAlgorithmResults
 from processing.tools import dataobjects
 from processing.tools.system import getTempFilename
 from processing.tools import vector
+from processing.core.SilentProgress import SilentProgress
 
 
 def runalg(alg, progress=None):
@@ -44,6 +45,8 @@ def runalg(alg, progress=None):
     Return true if everything went OK, false if the algorithm
     could not be completed.
     """
+    if progress is None:
+        progress = SilentProgress()
     try:
         alg.execute(progress)
         return True
